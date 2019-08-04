@@ -1,0 +1,45 @@
+using System;
+
+namespace ConsoleApp6
+{
+    public class StackOverﬂowPost
+    {
+        private int votes;
+        public string title { get; set; }
+        public string description { get; set; }
+        public DateTime creationDate { get; set; }
+
+        public StackOverﬂowPost()
+        {
+            votes = 0;
+        }
+        public void Upvote()
+        {
+            votes = votes + 1;
+        }
+        public void DownVote()
+        {
+            votes = votes - 1;
+        }
+        public int CurrentVotes()
+        {
+            return votes;
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            var testPost = new StackOverﬂowPost();
+            testPost.Upvote();
+            testPost.DownVote();
+            testPost.Upvote();
+            int votesCounted = testPost.CurrentVotes();
+            Console.WriteLine("Current Votes for This post: {0}", votesCounted);
+
+
+
+        }
+    }
+}
