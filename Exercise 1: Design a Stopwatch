@@ -1,0 +1,75 @@
+using System;
+
+namespace ConsoleApp6
+{
+    public class StopWatch
+    {
+        DateTime Start;
+        DateTime Stop;
+
+        public void StartTime()
+        {
+            Start = DateTime.Now;
+
+        }
+        public void StopTime()
+        {
+            Stop = DateTime.Now;
+            var Timespan = Stop - Start;
+            Console.WriteLine("Duration is {0}",Timespan);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Type in 'Start' to use the stopwatch or 'Exit' to quit");
+            var input = Console.ReadLine();
+
+            var Stopwatch = new StopWatch();
+            bool isStarted = false;
+            bool isAlreadyStarted = false;
+
+            while (input.ToLower() != "exit")
+            {
+                if (input.ToLower() == "start")
+                {
+                    if (isAlreadyStarted)
+                    {
+                        throw new InvalidOperationException("The Watch Already started!");
+                    }
+                    else
+                    {
+                        Stopwatch.StartTime();
+                        isStarted = true;
+                        isAlreadyStarted = true;
+                        Console.WriteLine("If you want to end timer, please type in 'stop'");
+                        input = Console.ReadLine();
+                    }
+                }
+                else if (input.ToLower() == "stop")
+                {
+                    if (isStarted)
+                    {
+                        Stopwatch.StopTime();
+                        Console.WriteLine("Now type 'stop' again for new time or 'start' to reset: ");
+                        input = Console.ReadLine();
+                        isAlreadyStarted = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("The Stopwatch Did Not start, You need to start if first");
+                        Console.WriteLine("Please type in 'start'");
+                        input = Console.ReadLine();
+
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("You did not type one of the required words. Please try again.");
+                    input = Console.ReadLine();
+                }
+            }
+        }
+    }
+}
