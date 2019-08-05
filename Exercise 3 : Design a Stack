@@ -1,0 +1,42 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Exercise
+{
+   public class Stack
+    {
+         readonly List<object> _items = new List<object>();
+
+        public void Push (object obj)
+        {
+            if (obj != null)
+            {
+                _items.Add(obj);
+            }
+            else
+            {
+                throw new InvalidOperationException("Can Not Add Null Objects to the List");
+            }
+        }
+        public object Pop()
+        {
+            if (_items.Count == 0)
+            {
+                throw new InvalidOperationException("List is Empty");
+            }
+            else
+            {
+                //LIFO
+                var lastItem = _items.Last();
+                _items.Remove(lastItem);
+                Console.WriteLine(lastItem);
+                return lastItem;
+            }
+        }
+        public void Clear()
+        {
+            _items.Clear();
+            Console.WriteLine("List Cleared");
+        }
+    }
