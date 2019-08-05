@@ -1,0 +1,67 @@
+namespace Exercise
+{
+    public abstract class DbConnection
+    {
+        public string _connectionString { get; set; }
+        public TimeSpan timeOut { get; set; }
+
+        public DbConnection(string connectionString)
+        {
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                throw new InvalidOperationException("Connection String Missing");
+            }
+            else
+            {
+                _connectionString = connectionString;
+            }
+        }
+        public abstract void Open();
+        public abstract void Close();
+    }
+    public class SqlConnection: DbConnection 
+    {
+        public SqlConnection(string connectionString):base(connectionString)
+        {
+                
+        }
+        public override void Close()
+        {
+            Console.WriteLine("SQL Connection Closed");
+        }
+
+        public override void  Open()
+        {
+            Console.WriteLine("SQL Connection Opened");
+        }
+    }
+    public class OracleConnection : DbConnection
+    {
+        public OracleConnection(string connectionString):base(connectionString)
+        {
+
+        }
+        public override void Close()
+        {
+            Console.WriteLine("Oracle Connection Closed");
+        }
+
+        public override void Open()
+        {
+            Console.WriteLine("Oracle Connection Opened");
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var connect1 = new SqlConnection("SqlString");
+            connect1.Open();
+            connect1.Close();
+
+            var connect2 = new OracleConnection("OracleString");
+            connect2.Open();
+            connect2.Close();
+        }
+    }
+}
