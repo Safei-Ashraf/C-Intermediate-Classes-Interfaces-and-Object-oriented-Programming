@@ -1,0 +1,29 @@
+    public class DbCommand
+    {
+        readonly DbConnection _dbConnection;
+        readonly string _instructions;
+
+        public DbCommand(DbConnection dbConnection, string instructions)
+        {
+            if (dbConnection == null)
+            {
+                throw new InvalidOperationException("Connection Can not Be Null");
+            }
+            if (string.IsNullOrWhiteSpace(instructions))
+            {
+                throw new InvalidOperationException("Instructions can not be empty");
+            }
+            else
+            {
+                dbConnection = _dbConnection;
+                instructions = _instructions;
+            }
+        }
+        
+        public void Execute()
+        {
+            _dbConnection.Open();
+            Console.WriteLine("Instructions are: {0}", _instructions);
+            _dbConnection.Close();
+        }
+    }
